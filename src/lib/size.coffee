@@ -1,6 +1,6 @@
 # Allows us to crop the canvas and produce a new smaller
 # canvas.
-Caman.Plugin.register "crop", (width, height, x = 0, y = 0) ->
+Caman.Plugin.register "crop", (width, height, x = 0, y = 0, circle = false) ->
   # Create our new canvas element
   if exports?
     canvas = new Canvas width, height
@@ -13,8 +13,20 @@ Caman.Plugin.register "crop", (width, height, x = 0, y = 0) ->
 
   ctx = canvas.getContext '2d'
 
-  # Perform the cropping by drawing to the new canvas
-  ctx.drawImage @canvas, x, y, width, height, 0, 0, width, height
+  # Perform the cropping by drawing to the new canvas and clip canvas if circular
+  if circle?
+    max = 0
+    if width > height?
+      ctx.scale 1, height / width
+      max = width
+    else
+      ctx.scale width / height, 1
+      max = height
+    ctx.arc max / 2, max / 2, max / 2, 0, Math.PI * 2
+    ctx.clip
+    ctx.drawImage @canvas, x, y, width, height, 0, 0, max, max
+  else
+    ctx.drawImage @canvas, x, y, width, height, 0, 0, width, height
 
   @cropCoordinates = x: x, y: y
 
