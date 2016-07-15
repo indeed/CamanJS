@@ -1,23 +1,23 @@
-Caman.Plugin.register "flip", (vertical) ->
-  canvas = null
-  ctx = null
+Caman.Plugin.register "flip", (vertical = false) ->
   width = @canvas.width
   height = @canvas.height
 
-  if typeof exports isnt "undefined" && exports isnt null ? 
+  if typeof exports isnt "undefined" && exports isnt null
     canvas = new Canvas(width, height);
-  else
   canvas = document.createElement 'canvas'
   canvas.width = width
   canvas.height = height
   ctx = canvas.getContext '2d'
-  ctx.translate width, 0
-  ctx.scale -1, 1
+  if vertical
+    ctx.translate 0, height
+    ctx.scale 1, -1
+  else
+    ctx.translate width, 0
+    ctx.scale -1, 1
   ctx.drawImage @canvas, 0, 0
   @replaceCanvas canvas
-  if vertical?
-    console.log "dank"
+
   return @
 
 Caman.Filter.register "flip", ->
-  @processPlugin "flip", Array.prototype.slice.call(arguments, 0)
+  @processPlugin "flip", Array.prototype.slice.call arguments, 0

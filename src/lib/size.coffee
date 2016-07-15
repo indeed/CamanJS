@@ -14,7 +14,7 @@ Caman.Plugin.register "crop", (width, height, x = 0, y = 0, circle = false) ->
   ctx = canvas.getContext '2d'
 
   # Perform the cropping by drawing to the new canvas and clip canvas if circular
-  if circle?
+  if circle
     max = 0
     if width > height?
       ctx.scale 1, height / width
@@ -23,7 +23,7 @@ Caman.Plugin.register "crop", (width, height, x = 0, y = 0, circle = false) ->
       ctx.scale width / height, 1
       max = height
     ctx.arc max / 2, max / 2, max / 2, 0, Math.PI * 2
-    ctx.clip
+    ctx.clip()
     ctx.drawImage @canvas, x, y, width, height, 0, 0, max, max
   else
     ctx.drawImage @canvas, x, y, width, height, 0, 0, width, height
