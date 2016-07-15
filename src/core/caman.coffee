@@ -26,8 +26,8 @@ else
 class Caman extends Module
   # The current version.
   @version:
-    release: "4.1.2"
-    date: "7/27/2013"
+    release: "4.1.3"
+    date: "7/15/2016"
 
   # @property [Boolean] Debug mode enables console logging.
   @DEBUG: false

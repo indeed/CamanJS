@@ -176,8 +176,8 @@
     extend(Caman, superClass);
 
     Caman.version = {
-      release: "4.1.2",
-      date: "7/27/2013"
+      release: "4.1.3",
+      date: "7/15/2016"
     };
 
     Caman.DEBUG = false;
@@ -2565,7 +2565,7 @@
       canvas.height = height;
     }
     ctx = canvas.getContext('2d');
-    if (circle != null) {
+    if (circle) {
       max = 0;
       if (width > (height != null)) {
         ctx.scale(1, height / width);
@@ -2575,7 +2575,7 @@
         max = height;
       }
       ctx.arc(max / 2, max / 2, max / 2, 0, Math.PI * 2);
-      ctx.clip;
+      ctx.clip();
       ctx.drawImage(this.canvas, x, y, width, height, 0, 0, max, max);
     } else {
       ctx.drawImage(this.canvas, x, y, width, height, 0, 0, width, height);
