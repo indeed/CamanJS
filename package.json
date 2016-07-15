@@ -44,7 +44,7 @@
   "main": "./dist/caman.full.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/meltingice/CamanJS.git"
+    "url": "http://github.com/indeed/CamanJS.git"
   },
   "dependencies": {
     "canvas": "*",
